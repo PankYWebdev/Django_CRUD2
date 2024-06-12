@@ -4,14 +4,36 @@
     <title>User Detail</title>
 </head>
 <body>
-    <h1>{{ user.name }}</h1>
-    <p>Email: {{ user.email }}</p>
-    <p>Role: {{ user.role }}</p>
-    <a href="{% url 'user_update' user.pk %}">Edit</a>
-    <form action="{% url 'user_delete' user.pk %}" method="POST">
-        {% csrf_token %}
-        <input type="submit" value="Delete">
-    </form>
+    <h1>User Details</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ user.name }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.role }}</td>
+                <td>
+                    <form action="{% url 'user_update' user.pk %}" method="GET" style="display:inline;">
+                        <input type="submit" value="Edit">
+                    </form>
+                    <form action="{% url 'user_delete' user.pk %}" method="POST" style="display:inline;">
+                        {% csrf_token %}
+                        <input type="submit" value="Delete">
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
     <a href="{% url 'user_list' %}">Back to list</a>
 </body>
 </html>
+
+
